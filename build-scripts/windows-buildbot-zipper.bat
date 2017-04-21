@@ -6,8 +6,8 @@ rem must be run from root of SDL source tree.
 rem This has been changed for Xeekworx so that it includes more builds
 rem and uses 7-zip instead of the mystery zip command.
 
-IF EXIST VisualC\Win32\Release GOTO okaydir
-echo Please run from root of source tree after doing a complete Debug and Release build.
+IF EXIST VisualC\Win32\Release IF EXIST VisualC\x64\Release IF EXIST VisualC\Win32\Debug IF EXIST VisualC\x64\Debug GOTO okaydir
+echo Please run from root of source tree after doing complete Debug and Release builds.
 GOTO done
 
 :okaydir
