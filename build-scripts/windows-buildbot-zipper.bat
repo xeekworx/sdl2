@@ -21,16 +21,29 @@ cd SDL
 mkdir include
 mkdir lib
 mkdir lib\win32
+mkdir lib\win32\release
+mkdir lib\win32\debug
 mkdir lib\x64
+mkdir lib\x64\release
+mkdir lib\x64\debug
 copy ..\..\include\*.h include\
-copy ..\..\VisualC\Win32\Release\SDL2.dll lib\win32\
-copy ..\..\VisualC\Win32\Release\SDL2.lib lib\win32\
-copy ..\..\VisualC\Win32\Release\SDL2main.lib lib\win32\
-copy ..\..\VisualC\x64\Release\SDL2.dll lib\x64\
-copy ..\..\VisualC\x64\Release\SDL2.lib lib\x64\
-copy ..\..\VisualC\x64\Release\SDL2main.lib lib\x64\
+copy ..\..\VisualC\Win32\Release\SDL2.dll lib\win32\release\
+copy ..\..\VisualC\Win32\Release\SDL2.lib lib\win32\release\
+copy ..\..\VisualC\Win32\Release\SDL2main.lib lib\win32\release\
+copy ..\..\VisualC\x64\Release\SDL2.dll lib\x64\release\
+copy ..\..\VisualC\x64\Release\SDL2.lib lib\x64\release\
+copy ..\..\VisualC\x64\Release\SDL2main.lib lib\x64\release\
+copy ..\..\VisualC\Win32\Debug\SDL2.dll lib\win32\debug\
+copy ..\..\VisualC\Win32\Debug\SDL2.lib lib\win32\debug\
+copy ..\..\VisualC\Win32\Debug\SDL2.pdb lib\win32\debug\
+copy ..\..\VisualC\Win32\Debug\SDL2main.lib lib\win32\debug\
+copy ..\..\VisualC\x64\Debug\SDL2.dll lib\x64\debug\
+copy ..\..\VisualC\x64\Debug\SDL2.lib lib\x64\debug\
+copy ..\..\VisualC\x64\Debug\SDL2.pdb lib\x64\debug\
+copy ..\..\VisualC\x64\Debug\SDL2main.lib lib\x64\debug\
 cd ..
-..\build-scripts\7z.exe a -tzip ..\%1 SDL
+erase /q /f ..\%1
+..\build-scripts\7z.exe a -tzip -y ..\%1 SDL
 cd ..
 erase /q /f /s zipper
 
