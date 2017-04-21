@@ -6,9 +6,23 @@ rem must be run from root of SDL source tree.
 rem This has been changed for Xeekworx so that it includes more builds
 rem and uses 7-zip instead of the mystery zip command.
 
-IF EXIST VisualC\Win32\Release IF EXIST VisualC\x64\Release IF EXIST VisualC\Win32\Debug IF EXIST VisualC\x64\Debug GOTO okaydir
-echo Please run from root of source tree after doing complete Debug and Release builds.
-GOTO done
+SETLOCAL
+IF EXIST "VisualC\Win32\Release [Static]" ^
+IF EXIST "VisualC\x64\Release [Static]" ^
+IF EXIST "VisualC\Win32\Debug [Static]" ^
+IF EXIST "VisualC\x64\Debug [Static]" (
+ SET have_staticlibs=true
+)
+
+IF EXIST VisualC\Win32\Release ^
+IF EXIST VisualC\x64\Release ^
+IF EXIST VisualC\Win32\Debug ^
+IF EXIST VisualC\x64\Debug (
+ GOTO okaydir
+) ELSE (
+ echo Please run from root of source tree after doing complete Debug and Release builds.
+ GOTO done
+)
 
 :okaydir
 erase /q /f /s zipper
@@ -41,11 +55,30 @@ copy ..\..\VisualC\x64\Debug\SDL2.dll lib\x64\debug\
 copy ..\..\VisualC\x64\Debug\SDL2.lib lib\x64\debug\
 copy ..\..\VisualC\x64\Debug\SDL2.pdb lib\x64\debug\
 copy ..\..\VisualC\x64\Debug\SDL2main.lib lib\x64\debug\
+
+IF have_staticlibs == "true" {
+ mkdir lib\win32\release_static
+ mkdir lib\win32\debug_static
+ mkdir lib\x64\release_static
+ mkdir lib\x64\debug_static
+ 
+ copy "..\..\VisualC\Win32\Release [Static]\SDL2.lib" lib\win32\release_static\
+ copy ..\..\VisualC\Win32\Release\SDL2main.lib lib\win32\release_static\
+ copy "..\..\VisualC\x64\Release [Static]\SDL2.lib" lib\x64\release_static\
+ copy ..\..\VisualC\x64\Release\SDL2main.lib lib\x64\release_static\
+ copy "..\..\VisualC\Win32\Debug [Static]\SDL2.lib" lib\win32\debug_static\
+ copy ..\..\VisualC\Win32\Debug\SDL2main.lib lib\win32\debug_static\
+ copy "..\..\VisualC\x64\Debug [Static]\SDL2.lib" lib\x64\debug_static\
+ copy ..\..\VisualC\x64\Debug\SDL2main.lib lib\x64\debug_static\
+)
+
 cd ..
-erase /q /f ..\%1
+if exist ..\%1 erase /q /f ..\%1
 ..\build-scripts\7z.exe a -tzip -y ..\%1 SDL
 cd ..
 erase /q /f /s zipper
+rd /s /q zipper
+if exist zipper rd /s /q zipper
 
 :done
 
