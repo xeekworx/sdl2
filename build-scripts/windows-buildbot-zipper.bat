@@ -3,8 +3,11 @@ rem just a helper batch file for collecting up files and zipping them.
 rem usage: windows-buildbot-zipper.bat <zipfilename>
 rem must be run from root of SDL source tree.
 
+rem This has been changed for Xeekworx so that it includes more builds
+rem and uses 7-zip instead of the mystery zip command.
+
 IF EXIST VisualC\Win32\Release GOTO okaydir
-echo Please run from root of source tree after doing a Release build.
+echo Please run from root of source tree after doing a complete Debug and Release build.
 GOTO done
 
 :okaydir
@@ -18,12 +21,16 @@ cd SDL
 mkdir include
 mkdir lib
 mkdir lib\win32
+mkdir lib\x64
 copy ..\..\include\*.h include\
 copy ..\..\VisualC\Win32\Release\SDL2.dll lib\win32\
 copy ..\..\VisualC\Win32\Release\SDL2.lib lib\win32\
 copy ..\..\VisualC\Win32\Release\SDL2main.lib lib\win32\
+copy ..\..\VisualC\x64\Release\SDL2.dll lib\x64\
+copy ..\..\VisualC\x64\Release\SDL2.lib lib\x64\
+copy ..\..\VisualC\x64\Release\SDL2main.lib lib\x64\
 cd ..
-zip -9r ..\%1 SDL
+..\build-scripts\7z.exe a -tzip ..\%1 SDL
 cd ..
 erase /q /f /s zipper
 
