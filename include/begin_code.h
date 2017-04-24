@@ -79,6 +79,15 @@
 #endif
 #endif /* SDLCALL */
 
+/* Removed DECLSPEC for custom static library builds so that building  
+   from this library doesn't result in exports in the ultimate target. 
+   This is an attempt to prevent SDL from exporting when I am building 
+   it statically. */
+#ifdef STATIC_SDL
+#undef DECLSPEC
+#define DECLSPEC
+#endif
+
 /* Removed DECLSPEC on Symbian OS because SDL cannot be a DLL in EPOC */
 #ifdef __SYMBIAN32__
 #undef DECLSPEC
