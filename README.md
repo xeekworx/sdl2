@@ -1,5 +1,5 @@
 ![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png) <br />
-Modified SDL2 Source, currently vesion 2.0.5
+Modified SDL2 Source, currently version 2.0.5
 ===========
 
 **This is a modified version of SDL2 for Xeekworx projects.**
