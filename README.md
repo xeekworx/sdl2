@@ -11,3 +11,4 @@ Modifications are listed here:
 4. Fixed C Runtimes to be the correct debug vs release versions in the VS2017 projects
 5. New "Release [Static]" & "Debug [Static]" VS2017 project configurations for building a SDL2 static library
 6. Improved Windows Buildbot Zipper batch script that utilizes an included 7-zip utility
+7. Static VS2017 configurations will create libraries that do not cause unnecessary exports and forces SDL2 to utilize MSVCRT libraries for better compatibility with projects using these libraries.
