@@ -12,3 +12,8 @@ Modifications are listed here:
 5. New "Release [Static]" & "Debug [Static]" VS2017 project configurations for building a SDL2 static library
 6. Improved Windows Buildbot Zipper batch script that utilizes an included 7-zip utility
 7. Static VS2017 configurations will create libraries that do not cause unnecessary exports and forces SDL2 to utilize MSVCRT libraries for better compatibility with projects using these libraries.
+
+To build an application with the SDL2 static library for Windows you will need to add these other libraries (a part of the Windows SDK) to your link configuration:
+winmm.lib
+imm32.lib
+version.lib
