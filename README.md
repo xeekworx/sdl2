@@ -1,5 +1,5 @@
 ![Xeekworx](http://xeekworx.com/images/github/xeekworx_logo.png) <br />
-Modified SDL2 Source, currently version 2.0.5
+Modified SDL2 Source, currently version 2.0.6
 ===========
 
 **This is a modified version of SDL2 for Xeekworx projects.**
@@ -17,3 +17,6 @@ To build an application with the SDL2 static library for Windows you will need t
 winmm.lib
 imm32.lib
 version.lib
+
+This branch is the 2.0.6 release candidate of SDL2. As of September 16, 2017 it is not officially released yet.
+2.0.6 primarily adds Vulkan support and Audio & Joystick improvements.
