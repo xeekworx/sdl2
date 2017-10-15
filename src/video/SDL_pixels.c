@@ -326,7 +326,7 @@ SDL_MasksToPixelFormatEnum(int bpp, Uint32 Rmask, Uint32 Gmask, Uint32 Bmask,
         if (Rmask == 0) {
             return SDL_PIXELFORMAT_RGB555;
         }
-        /* Fall through to 16-bit checks */
+	/* fallthrough */
     case 16:
         if (Rmask == 0) {
             return SDL_PIXELFORMAT_RGB565;
@@ -658,7 +658,7 @@ SDL_SetPixelFormatPalette(SDL_PixelFormat * format, SDL_Palette *palette)
         return SDL_SetError("SDL_SetPixelFormatPalette() passed NULL format");
     }
 
-    if (palette && palette->ncolors != (1 << format->BitsPerPixel)) {
+    if (palette && palette->ncolors > (1 << format->BitsPerPixel)) {
         return SDL_SetError("SDL_SetPixelFormatPalette() passed a palette that doesn't match the format");
     }
 
